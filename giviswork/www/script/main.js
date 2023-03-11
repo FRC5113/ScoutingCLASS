@@ -85,26 +85,24 @@ function fixPages() {
     for (var i = 1; i <= 6; i++) {
         document.getElementById("page" + i).style.display = "none";
     }
-    document.getElementById("page" + currentPage.toString()).style.display = "block";
+    document.getElementById("page" + currentPage.toString()).style.display = "inline-block";
 }
 
 function next() {
+    currentPage += 1;
     fixPages();
     setUpElements();
-    currentPage += 1;
 
     if (currentPage === 1) {
         backButton.style.display = "none";
         submitButton.style.display = "none";
         nextButton.style.display = "inline-block";
-
-        page1.display = "inline-block"; //
     } else if (currentPage === 6) {
         backButton.style.display = "inline-block";
         submitButton.style.display = "inline-block";
         nextButton.style.display = "none";
     } else {
-        backButton.style.display = "inline-block"; //
+        backButton.style.display = "inline-block";
         submitButton.style.display = "none";
         nextButton.style.display = "inline-block";
     }
