@@ -14,7 +14,7 @@ function globalPathFinder(folderList, requestedFile) {
         var folderPath = "";
         if (folderList !== [] || folderList !== {} || typeof folderList == 'object') {
             for (var i = 0; i < folderList.length; i++) {
-                if (typeof folderList[i] === 'string') {
+                if (typeof folderList[i] == 'string') {
                     var currentFolder = folderList[i];
                     var pathKeeper = null;
                     if (folderPath == "") {
@@ -61,30 +61,25 @@ app.get('/', function (req, res) {
     try {
         var infoFromURL = url.parse(req.url, true).query;
 
-        var filePath;
+        res.writeHead(200, { "Access-Control-Allow-Origin": "*" });
+
+        var filePath = globalPathFinder(["www"], "index.html");
 
         if ("page" in infoFromURL) {
             const page = infoFromURL.page;
-            if (page == "" || typeof page !== "string") {
-                filePath = globalPathFinder(["www"], "index.html");
-            } else {
-                if ("type" in infoFromURL) {
-                    const type = infoFromURL.type;
-                    if (type === "html") {
-                        filePath = globalPathFinder(["www"], page + "." + type);
-                    } else {
-                        if (type === "script" || type === "style") {
-                            filePath = globalPathFinder(["www", type], page + "." + getExtension(type));
-                        } else {
-                            filePath = globalPathFinder(["www"], "index.html");
-                        }
-                    }
-                } else {
-                    filePath = globalPathFinder(["www"], "index.html");
+            if ("type" in infoFromURL && page !== "" && typeof page == "string") {
+                const type = infoFromURL.type;
+                if (type === "html") {
+                    filePath = globalPathFinder(["www"], page + "." + type);
+                }
+                if (type === "script" || type === "style") {
+                    filePath = globalPathFinder(["www", type], page + "." + getExtension(type));
                 }
             }
         } else {
-            filePath = globalPathFinder(["www"], "index.html");
+            if ("type" in infoFromURL && infoFromURL.type === "img" && "img" in infoFromURL) {
+                filePath = globalPathFinder([infoFromURL.type], infoFromURL.img + ".png")
+            }
         }
 
         if (fs.existsSync(filePath)) { //checking if the file exists

@@ -12,7 +12,7 @@
             <h2 id="partName"> </h2>
         </div>
         <br>
-        <div id="page1">
+        <div id="page1" class="formPages">
             <!--
                 NAME: Pre-match
 
@@ -26,18 +26,18 @@
             -->
             <p id="Scouter-Initials-containerParagraph" class="Pre-Match-containerParagraph">
                 <label id="Scouter-Initials-label" class="Pre-Match-label" for="Scouter-Initials">
-                    Scouting Initials:&nbsp;
+                    Scouter Initials:&nbsp;
                 </label>
-                <input id="Scouter-Initials-input" class="Pre-Match-input" type="text" name="Scouter-Initials" />
+                <input id="Scouter-Initials-input" class="Pre-Match-input-text" type="text" name="Scouter-Initials" />
             </p>
 
             <br>
-            
+
             <p id="Event-containerParagraph" class="Pre-Match-containerParagraph">
                 <label id="Event-label" class="Pre-Match-label" for="Event">
                     Event:&nbsp;
                 </label>
-                <input id="Event-input" class="Pre-Match-input" type="text" name="Event" />
+                <input id="Event-input" class="Pre-Match-input-text" type="text" name="Event" value="2023njtab" disabled/>
             </p>
 
             <br>
@@ -62,22 +62,54 @@
             <br>
 
             <p id="Match-Number-containerParagraph" class="Pre-Match-containerParagraph">
-                <label id="Mach-Number-label" class="Pre-Match-label" for="Match-Number">
+                <label id="Match-Number-label" class="Pre-Match-label" for="Match-Number">
                     Match #:&nbsp;
                 </label>
-                <input id="Match-Number-input" class="Pre-Match-input" type="number" name="Match-Number" />
+                <input id="Match-Number-input" class="Pre-Match-input-number" type="number" name="Match-Number" />
             </p>
 
             <br>
 
             <p id="Robot-containerParagraph" class="Pre-Match-containerParagraph">
-                <label id="Robot-label" class="Pre-Match-label">
+                <label id="Robot-label" class="Pre-Match-label" style="display:inline-block;margin-right:10px">
                     Robot:&nbsp;
                 </label>
+                <br><br><br>
+                <p id="Robot-options-containerParagraph-ID" class="Robot-options-containerParagraph-Class" style="display:inline-block">
+                    <input id="R1" onchange="robotRadioChange('R1')" type="radio" name="Red1-input" value="Red 1" class="Robot-option-input"> Red 1
+                    <input id="B1" onchange="robotRadioChange('B1')" type="radio" name="Blue1-input" value="Blue 1" class="Robot-option-input"> Blue 1
+                    <br>
+                    <input id="R2" onchange="robotRadioChange('R2')" type="radio" name="Red2-input" value="Red 2" class="Robot-option-input"> Red 2
+                    <input id="B2" onchange="robotRadioChange('B2')" type="radio" name="Blue2-input" value="Blue 2" class="Robot-option-input"> Blue 2
+                    <br>
+                    <input id="R3" onchange="robotRadioChange('R3')" type="radio" name="Red3-input" value="Red 2" class="Robot-option-input"> Red 3
+                    <input id="B3" onchange="robotRadioChange('B3')" type="radio" name="Blue3-input" value="Blue 3" class="Robot-option-input"> Blue 3
+                </p>
+            </p>
+
+            <br>
+
+            <p id="Team-Number-containerParagraph" class="Pre-Match-containerParagraph">
+                <label id="Team-Number-label" class="Pre-Match-label" for="Team-Number">
+                    Team #:&nbsp;
+                </label>
+                <input id="Team-Number-input" class="Pre-Match-input-number" type="number" name="Team-Number" />
+            </p>
+
+            <br>
+
+            <p id="Auto-StartPosition-containerParagraphp" class="Pre-Match-containerParagraph">
+                <label id="Auto-Start-Position-label" class="Pre-Match-label">
+                    Auto Start Position
+                </label>
+                <br>
+                <br>
+                <img id="Auto-Start-Position-img" class="Pre-Match-img" src="http://localhost:8092/?type=img&img=field_image">
             </p>
         </div>
 
-        <div id="page2">
+        <div id="page2" class="formPages">
+            <p> 2 </p>
             <!--
                 NAME: Auton
 
@@ -87,9 +119,59 @@
                 Mobility?: checkbox
                 Docked: Docked (not engaged) && Engaged && Attempted but failed && Not attempted [default] [SELECT]
             -->
+
+            <!-- IMG -->
+
+            <br>
+
+            <p id="Crossed-Cable-containerParagraph" class="Auton-containerParagraph">
+                <label id="Crossed-Cable-label" class="Auton-label" for="Crossed-Cable">
+                    Crossed Cable:
+                </label>
+                <input id="Crossed-Cable-input" class="Auton-input-checkbox" type="checkbox" name="Crossed-Cable" />
+            </p>
+
+            <br>
+
+            <p id="Crossed-Charging-Station-containerParagraph" class="Auton-containerParagraph">
+                <label id="Crossed-Charging-Station-label" class="Auton-label" for="Crossed-Charging-Station">
+                    Crossed Charging Station
+                </label>
+                <input id="Crossed-Charging-Station-input" class="Auton-input-checkbox" type="checkbox" name="Crossed-Charging-Station" />
+            </p>
+
+            <br>
+
+            <p id="Mobility-containerParagraph" class="Auton-containerParagraph">
+                <label id="Mobility-label" class="Auton-label" for="Mobility">
+                    Mobility?:
+                </label>
+                <input id="Mobility-input" class="Auton-input-checkbox" type="checkbox" name="Mobility" />
+            </p>
+
+            <br>
+            
+            <p id="Docked-containerParagraph" class="Auton-containerParagraph">
+                <label id="Docked-label" class="Auton-label">
+                    Docked:
+                </label>
+                <input id="Docked-input" onchange="dockedRadioChange('Docked-input')" type="radio" name="Docked-input" value="Docked (not engaged)" class="Docked-option-input">
+                Docked (not engaged)
+                <br>
+                <input id="Engaged-input" onchange="dockedRadioChange('Engaged-input')" type="radio" name="Engaged-input" value="Engaged" class="Docked-option-input">
+                Engaged
+                <br>
+                <input id="Attempted-input" onchange="dockedRadioChange('Attempted-input')" type="radio" name="Attempted-input" value="Attempted" class="Attempted-option-input">
+                Attempted but failed
+                <br>
+                <input id="NotAttempted-input" onchange="dockedRadioChange('NotAttempted-input')" type="radio" name="NotAttempted-input" value="Not attempted" class="NotAttempted-option-input">
+                Not attempted
+                <br>
+            </p>
         </div>
 
-        <div id="page3">
+        <div id="page3" class="formPages">
+            <p> 3 </p>
             <!--
                 NAME: Teleop
 
@@ -104,7 +186,8 @@
             -->
         </div>
 
-        <div id="page4">
+        <div id="page4" class="formPages">
+            <p> 4 </p>
             <!--
                 NAME: Endgame
 
@@ -114,7 +197,8 @@
             -->
         </div>
 
-        <div id="page5">
+        <div id="page5" class="formPages">
+            <p> 5 </p>
             <!--
                 NAME: Miscellaneous
 
@@ -131,7 +215,8 @@
             -->
         </div>
 
-        <div id="page6">
+        <div id="page6" class="formPages">
+            <p> 6 </p>
             <!-- // / // -->
         </div>
 

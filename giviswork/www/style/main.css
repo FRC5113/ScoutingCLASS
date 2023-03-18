@@ -1,0 +1,18 @@
+.formPages {
+    width: 100%;
+    text-align: center;
+}
+
+#Robot-containerParagraph {
+    display: inline-block;
+    justify-content: space-between;
+}
+
+#Scouter-Initials-input, #Match-Number-input, #Team-Number-input {
+    width: 50px;
+}
+
+.Pre-Match-img {
+    width: 30%;
+    height: 30%;
+}
