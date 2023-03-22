@@ -95,17 +95,6 @@
                 </label>
                 <input id="Team-Number-input" class="Pre-Match-input-number" type="number" name="Team-Number" />
             </p>
-
-            <br>
-
-            <p id="Auto-StartPosition-containerParagraphp" class="Pre-Match-containerParagraph">
-                <label id="Auto-Start-Position-label" class="Pre-Match-label">
-                    Auto Start Position
-                </label>
-                <br>
-                <br>
-                <img id="Auto-Start-Position-img" class="Pre-Match-img" src="http://localhost:8092/?type=img&img=field_image">
-            </p>
         </div>
 
         <div id="page2" class="formPages">
@@ -123,13 +112,6 @@
             <!-- IMG -->
 
             <br>
-
-            <p id="Crossed-Cable-containerParagraph" class="Auton-containerParagraph">
-                <label id="Crossed-Cable-label" class="Auton-label" for="Crossed-Cable">
-                    Crossed Cable:
-                </label>
-                <input id="Crossed-Cable-input" class="Auton-input-checkbox" type="checkbox" name="Crossed-Cable" />
-            </p>
 
             <br>
 
@@ -150,23 +132,28 @@
             </p>
 
             <br>
-            
+
             <p id="Docked-containerParagraph" class="Auton-containerParagraph">
                 <label id="Docked-label" class="Auton-label">
                     Docked:
                 </label>
-                <input id="Docked-input" onchange="dockedRadioChange('Docked-input')" type="radio" name="Docked-input" value="Docked (not engaged)" class="Docked-option-input">
-                Docked (not engaged)
-                <br>
-                <input id="Engaged-input" onchange="dockedRadioChange('Engaged-input')" type="radio" name="Engaged-input" value="Engaged" class="Docked-option-input">
-                Engaged
-                <br>
-                <input id="Attempted-input" onchange="dockedRadioChange('Attempted-input')" type="radio" name="Attempted-input" value="Attempted" class="Attempted-option-input">
-                Attempted but failed
-                <br>
-                <input id="NotAttempted-input" onchange="dockedRadioChange('NotAttempted-input')" type="radio" name="NotAttempted-input" value="Not attempted" class="NotAttempted-option-input">
-                Not attempted
-                <br>
+                <p id="Robot-options-containerParagraph-ID" class="Robot-options-containerParagraph-Class" style="display:inline-block;text-align:left;vertical-align:middle">
+                    <input id="Docked-input" onchange="dockedRadioChange('Docked-input')" type="radio" name="Docked-input" value="Docked (not engaged)" class="Docked-option-input">
+                    Docked (not engaged)
+                    <br>
+                    <br>
+                    <input id="Engaged-input" onchange="dockedRadioChange('Engaged-input')" type="radio" name="Engaged-input" value="Engaged" class="Docked-option-input">
+                    Engaged
+                    <br>
+                    <br>
+                    <input id="Attempted-input" onchange="dockedRadioChange('Attempted-input')" type="radio" name="Attempted-input" value="Attempted" class="Attempted-option-input">
+                    Attempted but failed
+                    <br>
+                    <br>
+                    <input checked="true" id="NotAttempted-input" onchange="dockedRadioChange('NotAttempted-input')" type="radio" name="NotAttempted-input" value="Not attempted" class="NotAttempted-option-input">
+                    Not attempted
+                    <br>
+                </p>
             </p>
         </div>
 
@@ -184,6 +171,53 @@
                 Smart placement (creates links): checkbox
                 Floor pickup: Cones && Cubes && Both && Not attempted
             -->
+            
+            <!-- CYCLE TIMER -->
+
+            <!-- GRID SCORING -->
+
+            <p id="Feeder-Count-containerParagraph" class="Teleop-containerParagraph">
+                <label id="Feeder-Count-label" class="Teleop-label" for="Feeder-Count">
+                    Feeder Count:
+                    <br>
+                    (Fed another robot)
+                </label>
+                <input id="Feeder-Count-input" class="Teleop-input-number" type="number" name="Feeder-Count" />
+            </p>
+
+            <p id="Was-Fed-containerParagraph" class="Teleop-containerParagraph">
+                <label id="Was-Fed-label" class="Teleop-label" for="Was-Fed">
+                    Was Fed Game Pieces:
+                </label>
+                <input id="Was-Fed-input" class="Teleop-input-checkbox" type="checkbox" name="Was-Fed" />
+            </p>
+            
+            <p id="Made-Links-containerParagraph" class="Teleop-containerParagraph">
+                <label id="Made-Links-label" class="Teleop-label" for="Made-Links">
+                    Smart Placement?:
+                    <br>
+                    (Made links)
+                </label>
+                <input id="Made-Links-input" class="Teleop-input-checkbox" type="checkbox" name="Made-Links" />
+            </p>
+
+            <p id="Floor-Pickup-containerParagraph" class="Teleop-containerParagraph">
+                <label id="Floor-Pickup-label" class="Teleop-label">
+                    Floor Pickup:
+                </label>
+                <input id="Cones-input" onchange="floorPickupRadioChange('Cones-input')" type="radio" name="Cones" value="Cones" class="Teleop-option-input">
+                Cones
+                <br>
+                <input id="Cubes-input" onchange="floorPickupRadioChange('Cubes-input')" type="radio" name="Cubes" value="Cubes" class="Teleop-option-input">
+                Cubes
+                <br>
+                <input id="Both-input" onchange="floorPickupRadioChange('Both-input')" type="radio" name="Both" value="Attempted" class="Teleop-option-input">
+                Both
+                <br>
+                <input checked="true" id="NotAttempted-floorPickup" onchange="floorPickupRadioChange('NotAttempted-floorPickup')" type="radio" name="NotAttempted" value="Not attempted" class="Teleop-option-input">
+                Not attempted
+                <br>
+            </p>
         </div>
 
         <div id="page4" class="formPages">
@@ -195,6 +229,39 @@
                 Final Status: Parked && Docked (not engaged) && Engaged && Attempted but failed && Not attempted
                 Total # of alliance robots docked/engaged: "" (+- range 0-3)
             -->
+
+            <p id="Docking-Timer-containerParagraph" class="Endgame-containerParagraph">
+                <label id="Docking-Timer-label" class="Endgame-label" for="Docking-Timer">
+                    Docking Timer;
+                </label>
+                <p id="Docking-Timer-input-containerParagraph" class="Endgame-nestedContainerParagraph">
+                    <button id="Start-Stop-Timer" class="Endgame-Docking-Timer-input-containerParagraph-button" onclick="timeTimer()">
+                        Start
+                    </button>
+                    <input id="Docking-Timer-input" class="Endgame-input-number" type="number" for="Docking-Timer" />
+                    <button id="Reset-Timer" class="Endgame-Docking-Timer-input-containerParagraph-button" onclick="resetTimer()">
+                        Reset
+                    </button>
+                </p>
+            </p>
+
+            <p id="Final-Status-containerParagraph" class="Endgame-containerParagraph">
+                <label id="Final-Status-label" class="Endgame-label">
+                    Final Status
+                </label>
+                <input id="Final-Status-Parked-input" onchange="finalStatusRadioChange('Final-Status-Parked-input')" type="radio" name="Parked" value="Parked" class="Endgame-option-input">
+                Parked
+                <br>
+                <input id="Final-Status-Docked-input" onchange="finalStatusRadioChange('Final-Status-Docked-input')" type="radio" name="Docked" value="Docked (Not Engaged)" class="Endgame-option-input"/>
+                Docked (Not Engaged)
+                <br>
+                <input id="Final-Status-Engaged-input" onchange="finalStatusRadioChange('Final-Status-Engaged-input')" type="radio" name="Engaged" value="Engaged" class="Endgame-option-input" />
+                Engaged
+                <br>
+                <input checked="true" id="Final-StatusAttemptedButFailed-input" onchange="finalStatusRadioChange('Final-Status-AttemptedButFailed-input') " type="radio" name="AttemptedButFailed" value="Attempted but failed" class="Endgame-option-ipnut" />
+                Attempted but failed
+                <br>
+            </p>
         </div>
 
         <div id="page5" class="formPages">
@@ -213,6 +280,31 @@
                 Make good alliance partner?: checkbox
                 comments: text input
             -->
+
+            <p id="Driver-Skill-containerParagraph" class="Miscellaneous-containerParagraph">
+                <label id="Driver-Skill-label" class="Miscellaneous-label">
+                    Final Status:
+                </label>
+                <!--
+                    <input id="Not-Effective-input" onchange="driverSkillRadioChange('Not-Effective-input')" type="radio" name="Not-Effective" value="Not Effective" class="Miscellaneous-option-input" />
+                    Not Effective
+                    <br>
+                -->
+            </p>
+
+            <p id="Links-Scored-containerParagraph" class="Miscellaneous-containerParagraph">
+                <label id="Links-Scored-label" class="Miscellaneous-label" for="Deez-Nuts">
+                    Links Scored:
+                </label>
+                <input id="Links-Scored-input" type="text" name="Deez-Nuts" value="Links-Scored" />
+            </p>
+
+            <p id="Defense-Rating-containerParagraph" class="Miscellaneous-containerParagraph">
+                <label id="Defense-Rating-label" class="Miscellaneous-label">
+                    Defense Rating:
+                </label>
+                
+            </p>
         </div>
 
         <div id="page6" class="formPages">

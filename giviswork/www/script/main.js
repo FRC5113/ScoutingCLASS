@@ -42,6 +42,19 @@ var engagedInput;
 var attemptedInput;
 var notAttemptedInput;
 
+var lastFloorPickupOptionClicked;
+
+var conesInput;
+var cubesInput;
+var bothInput;
+var notAttemptedInputFloor_Pickup;
+
+var dockingTimerInput;
+
+var driverSkillContainer;
+
+var defenseRatingContainer;
+
 //
 
 function launch() {
@@ -57,6 +70,66 @@ function launch() {
 
     namer();
     fixPages();
+    setUpDriverSkill();
+}
+
+function pageGetter() {
+    switch (currentPage) {
+        case 1:
+            return "Pre-Match";
+        case 2:
+            return "Auton";
+        case 3:
+            return "Teleop";
+        case 4:
+            return "Endgame";
+        case 5:
+            return "Miscellaneous";
+    }
+    return "error";
+}
+
+function setUpRadio(radioName) {
+    let objArr = "";
+    let funcString = "";
+    let pageName = pageGetter();
+    let addString = "";
+    let className = "";
+    var container = null;
+    if (radioName === "Driver-Skill") {
+        objArr = ["Not Effective", "Average", "Very Effective", "Not Observed"];
+        funcString = "driverSkillRadioChange";
+        className = pageName + "option-input";
+        container = driverSkillContainer;
+    } else if (radioName === "Defense-Rating") {
+        objArr = ["Terrible", "Bad", "Below Average", "Average", "Good", "Excellent", "Did not play defense"];
+        funcString = "defenseRatingRadioChange";
+        className = pageName + "option-input";
+        container = defenseRatingContainer;
+    }
+
+    if (container !== null && pageName !== "error") {
+        addString += "<div class=\"radioContainer\">"
+        for (var i = 0; i < objArr.length; i++) {
+            let objId = objArr[i].replace(" ", "-") + "-input";
+            addString += "<input id=\"" + objId + "\" onchange=\"" + funcString + "(\'" + objId + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + "\" class=\"" + className + "\" /> " + objArr[i] + "<br>";
+        }
+        addString += "</div>"
+    }
+    container.innerHTML += addString;
+    setUpElements();
+}
+
+function driverSkillRadioChange(id) {
+    document.getElementById("Not-Effective-input").checked = false;
+    document.getElementById("Average-input").checked = false;
+    document.getElementById("Very-Effective-input").checked = false;
+    document.getElementById("Not-Observed-input").checked = false;
+    if (!document.getElementById(id).checked) {
+        document.getElementById(id).checked = true;
+    } else {
+        document.getElementById(id).checked = false;
+    }
 }
 
 function allInfoWasGiven() {
@@ -86,8 +159,12 @@ function next() {
         fixButtons();
         namer();
         catchInfo();
+        switch (currentPage) {
+            case 5:
+                setUpRadio("Driver-Skill");
+        }
     } else {
-        alert('fuck');
+        alert(allInfoWasGiven());
     }
     // footer.style.margin = "0 auto";
 }
@@ -105,6 +182,38 @@ function back() {
 
 function submit() {
     catchInfo();
+}
+
+function timeTimer() {
+    setUpElements();
+    var startStopTimer = document.getElementById('Start-Stop-Timer');
+    if (startStopTimer.innerHTML == "Start") {
+        startStopTimer.innerHTML = "Stop";
+        setInterval(theTimer, 100);
+    } else {
+        startStopTimer.innerHTML = "Start";
+        clearInterval(timerVariable);
+    }
+}
+
+function resetTimer() {
+    dockingTimerInput.value = 0.0;
+    setUpElements();
+}
+
+function theTimer() {
+    dockingTimerInput.value = parseFloat(dockingTimerInput.value) + 0.1;
+}
+
+function floorPickupRadioChange(input) {
+    conesInput.checked = false;
+    cubesInput.checked = false;
+    bothInput.checked = false;
+    notAttemptedInputFloor_Pickup = false;
+
+    document.getElementById(input).checked = true;
+    setUpElements();
+    lastFloorPickupOptionClicked = input;
 }
 
 function robotRadioChange(input) {
@@ -158,8 +267,21 @@ function setUpElements() {
     attemptedInput = document.getElementById('Attempted-input');
     notAttemptedInput = document.getElementById('NotAttempted-input');
 
+    conesInput = document.getElementById('Cones-input');
+    cubesInput = document.getElementById('Cubes-input');
+    bothInput = document.getElementById('Both-input');
+    notAttemptedInputFloor_Pickup = document.getElementById('NotAttempted-floorPickup');
+
     titles.style.textAlign = "center";
     footer.style.textAlign = "center";
+
+    dockingTimerInput = document.getElementById('Docking-Timer-input');
+
+    dockingTimerInput.value = 0.0;
+
+    driverSkillContainer = document.getElementById('Driver-Skill-containerParagraph');
+
+    defenseRatingContainer = document.getElementById('Defense-Rating-containerParagraph');
 }
 
 function dockedRadioChange(id) {

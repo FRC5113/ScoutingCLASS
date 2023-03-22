@@ -8,11 +8,30 @@
     justify-content: space-between;
 }
 
-#Scouter-Initials-input, #Match-Number-input, #Team-Number-input {
+#Scouter-Initials-input,
+#Match-Number-input,
+#Team-Number-input,
+#Feeder-Count-label {
     width: 50px;
+}
+
+#Docking-Timer-input {
+    width: 60px
 }
 
 .Pre-Match-img {
     width: 30%;
     height: 30%;
+}
+
+#Docked-containerParagraph {
+    text-align: center;
+}
+
+#Driver-Skill-containerParagraph {
+    /* */
+}
+
+.radioContainer {
+    /* */
 }
