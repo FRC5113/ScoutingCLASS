@@ -14,13 +14,12 @@ var data = {
         "Team": 5113
     },
     "AUTON": {
-        "Auto-scoring": [],
-        "Crossed_cable": false,
-        "Crossed_charging-station": false,
-        "Mobility?": false,
+        "Auto_scoring": [],
+        "Crossed_charging_station": false,
+        "Mobility": false,
         "Docked": false,
         "Engaged": false,
-        "DockedVal": "",
+        "Attempted_docking": false
     },
     "TELEOP": {
         "Cycle_timer": 0.0,
@@ -28,8 +27,6 @@ var data = {
         "Fed_another_bot": false,
         "Feeder_count": 0,
         "Was_fed": false,
-        "Was_defended": false,
-        "Defended_by": "",
         "Made_links": false,
         "pickedUpCubes": false,
         "pickedUpCones": false
@@ -140,6 +137,8 @@ function pageGetter() {
             return "Endgame";
         case 5:
             return "Miscellaneous";
+        case 6:
+            return "Submit";
     }
     return "error";
 }
@@ -210,22 +209,25 @@ function setUpRadio(radioName) {
             for (var i = 0; i < objArr.length; i++) {
                 let objId = objArr[i].replace(" ", "-") + "-input";
                 if (objId == defaultRadio) {
-                    addString += "<input id=\"" + objId + "\" onchange=\"" + funcString + "(\'" + objId + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + "\" class=\"" + className + "\" checked=\"true\" /> " + objArr[i] + "<br>";
+                    addString += "<input id=\"" + objId + "\" onchange=\"radioChange(\'" + objId + ", " + funcString + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + "\" class=\"" + className + "\" checked=\"true\" /> " + objArr[i] + "<br>";
                 } else if (objId == "1-input") {
-                    addString += "<input id=\"" + objId + "\" onchange=\"" + funcString + "(\'" + objId + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + " (slow)\" class=\"" + className + "\" /> " + objArr[i] + "<br>";
+                    addString += "<input id=\"" + objId + "\" onchange=\"radioChange(\'" + objId + ", " + funcString + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + " (slow)\" class=\"" + className + "\" /> " + objArr[i] + "<br>";
                 } else if (objId == "5-input") {
-                    addString += "<input id=\"" + objId + "\" onchange=\"" + funcString + "(\'" + objId + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + " (fast)\" class=\"" + className + "\" /> " + objArr[i] + "<br>";
+                    addString += "<input id=\"" + objId + "\" onchange=\"radioChange(\'" + objId + ", " + funcString + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + " (fast)\" class=\"" + className + "\" /> " + objArr[i] + "<br>";
                 } else {
-                    addString += "<input id=\"" + objId + "\" onchange=\"" + funcString + "(\'" + objId + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + "\" class=\"" + className + "\" /> " + objArr[i] + "<br>";
+                    addString += "<input id=\"" + objId + "\" onchange=\"radioChange(\'" + objId + ", " + funcString + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + "\" class=\"" + className + "\" /> " + objArr[i] + "<br>";
                 }
             }
         } else {
             for (var i = 0; i < objArr.length; i++) {
                 let objId = objArr[i].replace(" ", "-") + "-input";
+                if (radioName === "Defense-Rating" && objArr[i] === "Did not play defense") {
+                    objId = "Did-not-play-defense-input"
+                }
                 if (objId == defaultRadio) {
-                    addString += "<input id=\"" + objId + "\" onchange=\"" + funcString + "(\'" + objId + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + "\" class=\"" + className + "\" checked=\"true\" /> " + objArr[i] + "<br>";
+                    addString += "<input id=\"" + objId + "\" onchange=\"radioChange(\'" + objId + ", " + funcString + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + "\" class=\"" + className + "\" checked=\"true\" /> " + objArr[i] + "<br>";
                 } else {
-                    addString += "<input id=\"" + objId + "\" onchange=\"" + funcString + "(\'" + objId + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + "\" class=\"" + className + "\" /> " + objArr[i] + "<br>";
+                    addString += "<input id=\"" + objId + "\" onchange=\"radioChange(\'" + objId + ", " + funcString + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + "\" class=\"" + className + "\" /> " + objArr[i] + "<br>";
                 }
             }
         }
@@ -243,9 +245,47 @@ function setUpRadio(radioName) {
     setUpElements();
 }
 
+function radioChange(id, currentRadio) {
+    let idArr = [];
+    if (currentRadio === "speedRatingRadioChange") {
+        idArr = [
+            "1-input",
+            "2-input",
+            "3-input",
+            "4-input",
+            "5-input"
+        ];
+    } else if (currentRadio === "defenseRatingRadioChange") {
+        idArr = [
+            "Terrible-input",
+            "Bad-input",
+            "Below-Average-input",
+            "Average-input",
+            "Good-input",
+            "Excellent-input",
+            "Did-not-play-defense-input"
+        ];
+    } else if (currentRadio === "driverSkillRadioChange") {
+        idArr = [
+            "Not-Effective-input",
+            "Average-input",
+            "Very-Effective-input",
+            "Not-Observed-input"
+        ];
+    }
+    for (var i = 0; i < objArr.length; i++) {
+        document.getElementById(objArr[i]).checked = false;
+    }
+    if (!document.getElementById(id).checked) {
+        document.getElementById(id).checked = true;
+    } else {
+        document.getElementById(id).checked = false;
+    }
+}
+
 function speedRatingRadioChange(id) {
     speedRatingLastClick = id;
-    idArr = [
+    let objArr = [
         "1-input",
         "2-input",
         "3-input",
@@ -264,7 +304,7 @@ function speedRatingRadioChange(id) {
 
 function defenseRatingRadioChange(id) {
     defenseRatingLastClick = id;
-    objArr = [
+    let objArr = [
         "Terrible-input",
         "Bad-input",
         "Below-Average-input",
@@ -285,7 +325,7 @@ function defenseRatingRadioChange(id) {
 
 function driverSkillRadioChange(id) {
     driverSkillLastClick = id;
-    objArr = [
+    let objArr = [
         "Not-Effective-input",
         "Average-input",
         "Very-Effective-input",
@@ -358,6 +398,194 @@ function back() {
 
 function submit() {
     catchInfo();
+    /*
+    var data = {
+        "PRE_MATCH": {
+            "Scouter": "",
+            "Event": "",
+            "Match_level": "",
+            "Match_number": "",
+            "Robot": "",
+            "Team": 5113
+        },
+        "AUTON": {
+            "Auto_scoring": [],
+            "Crossed_charging_station": false,
+            "Mobility": false,
+            "Docked": false,
+            "Engaged": false,
+            "Attempted_docking": false
+        },
+        "TELEOP": {
+            "Cycle_timer": 0.0,
+            "Grid_scoring": [],
+            "Fed_another_bot": false,
+            "Feeder_count": 0,
+            "Was_fed": false,
+            "Made_links": false,
+            "pickedUpCubes": false,
+            "pickedUpCones": false
+        },
+        "ENDGAME": {
+            "Docking_timer": 0.0,
+            "Final_status": "",
+            "Total_number_of_alliance_robots_docked_or_engaged": 0
+        },
+        "MISCELLANEOUS": {
+            "Driver_skill": 0,
+            "Links_scored": 0,
+            "Defense_rating": 0,
+            "Swerve_drive": false,
+            "Speed_rating": 3,
+            "Died_or_immobilized": false,
+            "Tippy": false,
+            "Dropped_cones": false,
+            "comments": ""
+        }
+    };
+    */
+    setUpElements();
+    // PRE_MATCH
+    data.PRE_MATCH.Scouter = document.getElementById("Scouter-Initials-input").value;
+    data.PRE_MATCH.Event = document.getElementById("Event-input").value;
+    data.PRE_MATCH.Match_level = document.getElementById("Match-Level-select").value;
+    data.PRE_MATCH.Match_number = document.getElementById("Match-Number-input").value;
+    // dasaweria: // data.PRE_MATCH.Robot = dataRobotGetter();
+    data.PRE_MATCH.Team = document.getElementById("Team-Number-input").value;
+
+    //AUTON
+    data.AUTON.Auto_scoring = getAuto_scoring();
+    data.AUTON.Crossed_charging_station = document.getElementById("Crossed-Charging-Station-input").checked;
+    data.AUTON.Mobility = document.getElementById("Mobility-input").checked;
+    data.AUTON.Docked = document.getElementById("Docked-input").checked;
+    data.AUTON.Engaged = document.getElementById("Engaged-input").checked;
+    data.AUTON.Attempted_docking = document.getElementById("Attempted-input").checked;
+
+    //TELEOP
+    // dasaweria: // data.TELEOP.Cycle_timer = document.getElementById("Cycle-Timer-input").value;
+    // dasaweria: // data.TELEOP.Grid_scoring = getGrid_scoring();
+    data.TELEOP.Fed_another_bot = document.getElementById("Feeder-Count-input").value !== null;
+    data.TELEOP.Was_fed = document.getElementById("Was-Fed-input").checked;
+    data.TELEOP.Made_links = document.getElementById("Made-Links-input").checked;
+    data.TELEOP.pickedUpCubes = getFloorPickup("Cubes");
+    data.TELEOP.pickedUpCones = getFloorPickup("Cones");
+
+    //ENDGAME
+    data.ENDGAME.Docking_timer = document.getElementById("Docking-Timer-input");
+    data.ENDGAME.Final_status = getFinalStatus();
+    data.ENDGAME.Total_number_of_alliance_robots_docked_or_engaged = document.getElementById("totalNumberOfAllianceRobotsDockedOrEngaged-input").value;
+
+    //MISCELLANEOUS
+    data.MISCELLANEOUS.Driver_skill.Driver_skill = driverSkillGetter();
+    data.MISCELLANEOUS.Links_scored = document.getElementById("Links-Scored-input").value;
+    data.MISCELLANEOUS.Defense_rating = getDefenseRating();
+    data.MISCELLANEOUS.Swerve_drive = document.getElementById("swerveDrive-input").value;
+    data.MISCELLANEOUS.Speed_rating = getSpeedRating();
+}
+
+function getSpeedRating() {
+
+}
+
+function getDefenseRating() {
+    objArr = [
+        "Terrible-input",
+        "Bad-input",
+        "Below-Average-input",
+        "Average-input",
+        "Good-input",
+        "Excellent-input",
+        "Did-not-play-defense-input"
+    ];
+    for (var i = 0; i < objArr.length; i++) {
+        if (document.getElementById(objArr[i]).checked) {
+            if (i === objArr.length - 1) {
+                return false;
+            }
+            return i + 1;
+        }
+    }
+}
+
+function driverSkillGetter() {
+    /*
+        objArr = [
+            "Not Effective",
+            "Average",
+            "Very Effective",
+            "Not Observed"
+        ];
+    */
+    let objArr = [
+        "Not-Effective-input",
+        "Average-input",
+        "Very-Effective-input",
+        "Not-Observed-input"
+    ];
+    for (var i = 0; i < objArr.length; i++) {
+        if (document.getElementById(objArr[i]).checked) {
+            if (i === objArr.length - 1) {
+                return "unkown";
+            }
+            return i + 1;
+        }
+    }
+}
+
+function getFinalStatus() {
+    let idArr = [
+        "Final-Status-Parked-input",
+        "Final-Status-Docked-input",
+        "Final-Status-Engaged-input",
+        "Final-Status-AttemptedButFailed-input"
+    ];
+    for (var i = 0; i < idArr.length; i++) {
+        if (document.getElementById(idArr[i]).checked) {
+            let returnString = idArr[i].replace("-input", "");
+            returnString = returnString.replace("Final-Status-", "");
+            return returnString;
+        }
+    }
+}
+
+function getFloorPickup(input) {
+    pickedUpCubes = document.getElementById("Cubes-input").checked;
+    pickedUpCones = document.getElementById("Cones-input").checked;
+    if (document.getElementById("Both-input").checked) {
+        pickedUpCubes = true;
+        pickedUpCones = true;
+    }
+    if (input === "Cubes") {
+        return pickedUpCubes;
+    } else {
+        return pcikedUpCones;
+    }
+}
+
+function getGrid_scoring() {
+    let arr = [];
+    return arr;
+}
+
+function getAuto_scoring() {
+    let arr = [];
+    return arr;
+}
+
+function dataRobotGetter() {
+    idArr = [
+        "R1",
+        "R2",
+        "R3",
+        "B1",
+        "B2",
+        "B3"
+    ];
+    for (var i = 0; i < idArr.length; i++) {
+        if (document.getElementById(idArr[i]).checked) {
+            return idArr[i];
+        }
+    }
 }
 
 function timeTimer() {
