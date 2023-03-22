@@ -35,3 +35,11 @@
 .radioContainer {
     /* */
 }
+
+.Teleop-option-input {
+    display: "inline-block";
+}
+
+#Feeder-Count-input {
+    padding-bottom: 6;
+}

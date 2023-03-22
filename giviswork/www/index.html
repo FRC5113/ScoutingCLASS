@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script type="text/javascript" src="http://localhost:8091/?page=main&type=script"> </script>
-        <link rel="stylesheet" href="http://localhost:8091/?page=main&type=style">
-    </head>
 
-    <body onload="launch()">
-        <div id="titles">
-            <h1 id="pageTitle"> CHARED UP </h1> <!-- make it a cool font + give it a cool border / design-->
-            <h2 id="pitScouting"> Pit Scouting </h2> <!-- ^^ -->
-            <h2 id="partName"> </h2>
-        </div>
-        <br>
-        <div id="page1" class="formPages">
-            <!--
+<head>
+    <script type="text/javascript" src="http://localhost:8091/?page=main&type=script"> </script>
+    <link rel="stylesheet" href="http://localhost:8091/?page=main&type=style">
+</head>
+
+<body onload="launch()">
+    <div id="titles">
+        <h1 id="pageTitle"> CHARED UP </h1> <!-- make it a cool font + give it a cool border / design-->
+        <h2 id="pitScouting"> Pit Scouting </h2> <!-- ^^ -->
+        <h2 id="partName"> </h2>
+    </div>
+    <br>
+    <div id="page1" class="formPages">
+        <!--
                 NAME: Pre-match
 
                 Scouter Initials: ""
@@ -24,82 +25,89 @@
                 Team #: "" [INT]
                 Auto Start Position: UNDO [BUTTON] & FLIP IMAGE [BUTTON] & image w/ point on it [IMG]
             -->
-            <p id="Scouter-Initials-containerParagraph" class="Pre-Match-containerParagraph">
-                <label id="Scouter-Initials-label" class="Pre-Match-label" for="Scouter-Initials">
-                    Scouter Initials:&nbsp;
-                </label>
-                <input id="Scouter-Initials-input" class="Pre-Match-input-text" type="text" name="Scouter-Initials" />
-            </p>
+        <p id="Scouter-Initials-containerParagraph" class="Pre-Match-containerParagraph">
+            <label id="Scouter-Initials-label" class="Pre-Match-label" for="Scouter-Initials">
+                Scouter Initials:&nbsp;
+            </label>
+            <input id="Scouter-Initials-input" class="Pre-Match-input-text" type="text" name="Scouter-Initials" />
+        </p>
 
+        <br>
+
+        <p id="Event-containerParagraph" class="Pre-Match-containerParagraph">
+            <label id="Event-label" class="Pre-Match-label" for="Event">
+                Event:&nbsp;
+            </label>
+            <input id="Event-input" class="Pre-Match-input-text" type="text" name="Event" value="2023njtab" disabled />
+        </p>
+
+        <br>
+
+        <p id="Match-Level-containerParagraph" class="Pre-Match-containerParagraph">
+            <label id="Math-Level-label" class="Pre-Match-label" for="Match-Level">
+                Match Level:&nbsp;
+            </label>
+            <select id="Match-Level-select" class="Pre-Match-select" name="Match-Level">
+                <option id="Match-Level-Quals-option" class="Pre-Match-option" value="Quals">
+                    Quals
+                </option>
+                <option id="Match-Level-Double-Elimination-option" class="Pre-Match-option" value="Double Elmination">
+                    Double Elimination
+                </option>
+                <option id="Match-Level-Finals-option" class="Pre-Match-option" value="Finals">
+                    Finals
+                </option>
+            </select>
+        </p>
+
+        <br>
+
+        <p id="Match-Number-containerParagraph" class="Pre-Match-containerParagraph">
+            <label id="Match-Number-label" class="Pre-Match-label" for="Match-Number">
+                Match #:&nbsp;
+            </label>
+            <input id="Match-Number-input" class="Pre-Match-input-number" type="number" name="Match-Number" />
+        </p>
+
+        <br>
+
+        <p id="Robot-containerParagraph" class="Pre-Match-containerParagraph">
+            <label id="Robot-label" class="Pre-Match-label" style="display:inline-block;margin-right:10px">
+                Robot:&nbsp;
+            </label>
+            <br><br><br>
+        <p id="Robot-options-containerParagraph-ID" class="Robot-options-containerParagraph-Class"
+            style="display:inline-block">
+            <input id="R1" onchange="robotRadioChange('R1')" type="radio" name="Red1-input" value="Red 1"
+                class="Robot-option-input"> Red 1
+            <input id="B1" onchange="robotRadioChange('B1')" type="radio" name="Blue1-input" value="Blue 1"
+                class="Robot-option-input"> Blue 1
             <br>
-
-            <p id="Event-containerParagraph" class="Pre-Match-containerParagraph">
-                <label id="Event-label" class="Pre-Match-label" for="Event">
-                    Event:&nbsp;
-                </label>
-                <input id="Event-input" class="Pre-Match-input-text" type="text" name="Event" value="2023njtab" disabled/>
-            </p>
-
+            <input id="R2" onchange="robotRadioChange('R2')" type="radio" name="Red2-input" value="Red 2"
+                class="Robot-option-input"> Red 2
+            <input id="B2" onchange="robotRadioChange('B2')" type="radio" name="Blue2-input" value="Blue 2"
+                class="Robot-option-input"> Blue 2
             <br>
+            <input id="R3" onchange="robotRadioChange('R3')" type="radio" name="Red3-input" value="Red 2"
+                class="Robot-option-input"> Red 3
+            <input id="B3" onchange="robotRadioChange('B3')" type="radio" name="Blue3-input" value="Blue 3"
+                class="Robot-option-input"> Blue 3
+        </p>
+        </p>
 
-            <p id="Match-Level-containerParagraph" class="Pre-Match-containerParagraph">
-                <label id="Math-Level-label" class="Pre-Match-label" for="Match-Level">
-                    Match Level:&nbsp;
-                </label>
-                <select id="Match-Level-select" class="Pre-Match-select" name="Match-Level">
-                    <option id="Match-Level-Quals-option"  class="Pre-Match-option" value="Quals">
-                        Quals
-                    </option>
-                    <option id="Match-Level-Double-Elimination-option" class="Pre-Match-option" value="Double Elmination">
-                        Double Elimination
-                    </option>
-                    <option id="Match-Level-Finals-option" class="Pre-Match-option" value="Finals">
-                        Finals
-                    </option>
-                </select>
-            </p>
+        <br>
 
-            <br>
+        <p id="Team-Number-containerParagraph" class="Pre-Match-containerParagraph">
+            <label id="Team-Number-label" class="Pre-Match-label" for="Team-Number">
+                Team #:&nbsp;
+            </label>
+            <input id="Team-Number-input" class="Pre-Match-input-number" type="number" name="Team-Number" />
+        </p>
+    </div>
 
-            <p id="Match-Number-containerParagraph" class="Pre-Match-containerParagraph">
-                <label id="Match-Number-label" class="Pre-Match-label" for="Match-Number">
-                    Match #:&nbsp;
-                </label>
-                <input id="Match-Number-input" class="Pre-Match-input-number" type="number" name="Match-Number" />
-            </p>
-
-            <br>
-
-            <p id="Robot-containerParagraph" class="Pre-Match-containerParagraph">
-                <label id="Robot-label" class="Pre-Match-label" style="display:inline-block;margin-right:10px">
-                    Robot:&nbsp;
-                </label>
-                <br><br><br>
-                <p id="Robot-options-containerParagraph-ID" class="Robot-options-containerParagraph-Class" style="display:inline-block">
-                    <input id="R1" onchange="robotRadioChange('R1')" type="radio" name="Red1-input" value="Red 1" class="Robot-option-input"> Red 1
-                    <input id="B1" onchange="robotRadioChange('B1')" type="radio" name="Blue1-input" value="Blue 1" class="Robot-option-input"> Blue 1
-                    <br>
-                    <input id="R2" onchange="robotRadioChange('R2')" type="radio" name="Red2-input" value="Red 2" class="Robot-option-input"> Red 2
-                    <input id="B2" onchange="robotRadioChange('B2')" type="radio" name="Blue2-input" value="Blue 2" class="Robot-option-input"> Blue 2
-                    <br>
-                    <input id="R3" onchange="robotRadioChange('R3')" type="radio" name="Red3-input" value="Red 2" class="Robot-option-input"> Red 3
-                    <input id="B3" onchange="robotRadioChange('B3')" type="radio" name="Blue3-input" value="Blue 3" class="Robot-option-input"> Blue 3
-                </p>
-            </p>
-
-            <br>
-
-            <p id="Team-Number-containerParagraph" class="Pre-Match-containerParagraph">
-                <label id="Team-Number-label" class="Pre-Match-label" for="Team-Number">
-                    Team #:&nbsp;
-                </label>
-                <input id="Team-Number-input" class="Pre-Match-input-number" type="number" name="Team-Number" />
-            </p>
-        </div>
-
-        <div id="page2" class="formPages">
-            <p> 2 </p>
-            <!--
+    <div id="page2" class="formPages">
+        <p> 2 </p>
+        <!--
                 NAME: Auton
 
                 Auto Scoring: Hybrid Cones [IMG]
@@ -109,57 +117,45 @@
                 Docked: Docked (not engaged) && Engaged && Attempted but failed && Not attempted [default] [SELECT]
             -->
 
-            <!-- IMG -->
+        <!-- IMG -->
 
-            <br>
+        <br>
 
-            <br>
+        <p id="Crossed-Charging-Station-containerParagraph" class="Auton-containerParagraph">
+            <label id="Crossed-Charging-Station-label" class="Auton-label" for="Crossed-Charging-Station">
+                Crossed Charging Station
+            </label>
+            <input id="Crossed-Charging-Station-input" class="Auton-input-checkbox" type="checkbox"
+                name="Crossed-Charging-Station" />
+        </p>
 
-            <p id="Crossed-Charging-Station-containerParagraph" class="Auton-containerParagraph">
-                <label id="Crossed-Charging-Station-label" class="Auton-label" for="Crossed-Charging-Station">
-                    Crossed Charging Station
-                </label>
-                <input id="Crossed-Charging-Station-input" class="Auton-input-checkbox" type="checkbox" name="Crossed-Charging-Station" />
-            </p>
+        <p id="Mobility-containerParagraph" class="Auton-containerParagraph">
+            <label id="Mobility-label" class="Auton-label" for="Mobility">
+                Mobility?:
+            </label>
+            <input id="Mobility-input" class="Auton-input-checkbox" type="checkbox" name="Mobility" />
+        </p>
 
-            <br>
-
-            <p id="Mobility-containerParagraph" class="Auton-containerParagraph">
-                <label id="Mobility-label" class="Auton-label" for="Mobility">
-                    Mobility?:
-                </label>
-                <input id="Mobility-input" class="Auton-input-checkbox" type="checkbox" name="Mobility" />
-            </p>
-
-            <br>
-
-            <p id="Docked-containerParagraph" class="Auton-containerParagraph">
-                <label id="Docked-label" class="Auton-label">
-                    Docked:
-                </label>
-                <p id="Robot-options-containerParagraph-ID" class="Robot-options-containerParagraph-Class" style="display:inline-block;text-align:left;vertical-align:middle">
-                    <input id="Docked-input" onchange="dockedRadioChange('Docked-input')" type="radio" name="Docked-input" value="Docked (not engaged)" class="Docked-option-input">
-                    Docked (not engaged)
-                    <br>
-                    <br>
-                    <input id="Engaged-input" onchange="dockedRadioChange('Engaged-input')" type="radio" name="Engaged-input" value="Engaged" class="Docked-option-input">
-                    Engaged
-                    <br>
-                    <br>
-                    <input id="Attempted-input" onchange="dockedRadioChange('Attempted-input')" type="radio" name="Attempted-input" value="Attempted" class="Attempted-option-input">
-                    Attempted but failed
-                    <br>
-                    <br>
-                    <input checked="true" id="NotAttempted-input" onchange="dockedRadioChange('NotAttempted-input')" type="radio" name="NotAttempted-input" value="Not attempted" class="NotAttempted-option-input">
-                    Not attempted
-                    <br>
-                </p>
-            </p>
+        <p id="Docked-containerParagraph" class="Auton-containerParagraph"
+            style="justify-content: space-between; display: inline-block;">
+            <label id="Docked-label" class="Auton-label" style="display: block;"> Docked: </label>
+        <div style="text-align: left; margin-left:48%;">
+            <input id="Docked-input" onchange="dockedRadioChange('Docked-input')" type="radio" name="Docked-input"
+                value="Docked (not engaged)" class="Docked-option-input"> Docked (not engaged) <br>
+            <input id="Engaged-input" onchange="dockedRadioChange('Engaged-input')" type="radio" name="Engaged-input"
+                value="Engaged" class="Docked-option-input"> Engaged <br>
+            <input id="Attempted-input" onchange="dockedRadioChange('Attempted-input')" type="radio"
+                name="Attempted-input" value="Attempted" class="Attempted-option-input"> Attempted but failed <br>
+            <input checked="true" id="NotAttempted-input" onchange="dockedRadioChange('NotAttempted-input')"
+                type="radio" name="NotAttempted-input" value="Not attempted" class="NotAttempted-option-input"> Not
+            attempted <br>
         </div>
+        </p>
+    </div>
 
-        <div id="page3" class="formPages">
-            <p> 3 </p>
-            <!--
+    <div id="page3" class="formPages">
+        <p> 3 </p>
+        <!--
                 NAME: Teleop
 
                 Cycle Timer: FORCE 'em (CHECK THE SITE FOR MORE INFO: file:///Users/givitsvariani/Documents/Givi/ScoutingCLASS/index.html)
@@ -171,58 +167,90 @@
                 Smart placement (creates links): checkbox
                 Floor pickup: Cones && Cubes && Both && Not attempted
             -->
-            
-            <!-- CYCLE TIMER -->
 
-            <!-- GRID SCORING -->
+        <!-- CYCLE TIMER -->
 
-            <p id="Feeder-Count-containerParagraph" class="Teleop-containerParagraph">
-                <label id="Feeder-Count-label" class="Teleop-label" for="Feeder-Count">
-                    Feeder Count:
-                    <br>
-                    (Fed another robot)
-                </label>
-                <input id="Feeder-Count-input" class="Teleop-input-number" type="number" name="Feeder-Count" />
-            </p>
+        <!-- GRID SCORING -->
 
-            <p id="Was-Fed-containerParagraph" class="Teleop-containerParagraph">
-                <label id="Was-Fed-label" class="Teleop-label" for="Was-Fed">
-                    Was Fed Game Pieces:
-                </label>
-                <input id="Was-Fed-input" class="Teleop-input-checkbox" type="checkbox" name="Was-Fed" />
-            </p>
-            
-            <p id="Made-Links-containerParagraph" class="Teleop-containerParagraph">
-                <label id="Made-Links-label" class="Teleop-label" for="Made-Links">
-                    Smart Placement?:
-                    <br>
-                    (Made links)
-                </label>
-                <input id="Made-Links-input" class="Teleop-input-checkbox" type="checkbox" name="Made-Links" />
-            </p>
-
-            <p id="Floor-Pickup-containerParagraph" class="Teleop-containerParagraph">
-                <label id="Floor-Pickup-label" class="Teleop-label">
-                    Floor Pickup:
-                </label>
-                <input id="Cones-input" onchange="floorPickupRadioChange('Cones-input')" type="radio" name="Cones" value="Cones" class="Teleop-option-input">
-                Cones
+        <p id="Feeder-Count-containerParagraph" class="Teleop-containerParagraph">
+            <label id="Feeder-Count-label" class="Teleop-label" for="Feeder-Count"
+                style="margin-right:3; display:inline-block; width:5%">
+                Feeder Count:
                 <br>
-                <input id="Cubes-input" onchange="floorPickupRadioChange('Cubes-input')" type="radio" name="Cubes" value="Cubes" class="Teleop-option-input">
-                Cubes
-                <br>
-                <input id="Both-input" onchange="floorPickupRadioChange('Both-input')" type="radio" name="Both" value="Attempted" class="Teleop-option-input">
-                Both
-                <br>
-                <input checked="true" id="NotAttempted-floorPickup" onchange="floorPickupRadioChange('NotAttempted-floorPickup')" type="radio" name="NotAttempted" value="Not attempted" class="Teleop-option-input">
-                Not attempted
-                <br>
-            </p>
+                (Fed another robot)
+            </label>
+        <div>
+            <input id="Feeder-Count-input" class="Teleop-input-number" type="number" name="Feeder-Count"
+                style="margin-left:7; display:inline-block; margin-top:-5px;" />
         </div>
+        </p>
 
-        <div id="page4" class="formPages">
-            <p> 4 </p>
-            <!--
+        <p id="Was-Fed-containerParagraph" class="Teleop-containerParagraph">
+            <label id="Was-Fed-label" class="Teleop-label" for="Was-Fed">
+                Was Fed Game Pieces:
+            </label>
+            <input id="Was-Fed-input" class="Teleop-input-checkbox" type="checkbox" name="Was-Fed" />
+        </p>
+
+        <p id="Made-Links-containerParagraph" class="Teleop-containerParagraph">
+            <label id="Made-Links-label" class="Teleop-label" for="Made-Links">
+                Smart Placement?:
+                <br>
+                (Made links)
+            </label>
+            <input id="Made-Links-input" class="Teleop-input-checkbox" type="checkbox" name="Made-Links" />
+        </p>
+
+        <p id="Floor-Pickup-containerParagraph" class="Teleop-containerParagraph">
+            <label id="Floor-Pickup-label" class="Teleop-label" style="display: block;"> Floor Pickup: </label>
+        <div style="text-align: left; margin-left:48%;">
+            <input id="Cones-input" onchange="floorPickupRadioChange('Cones-input')" type="radio" name="Floor-Pickup"
+                value="Cones" class="Teleop-option-input"> Cones <br>
+            <input id="Cubes-input" onchange="floorPickupRadioChange('Cubes-input')" type="radio" name="Floor-Pickup"
+                value="Cubes" class="Teleop-option-input"> Cubes <br>
+            <input id="Both-input" onchange="floorPickupRadioChange('Both-input')" type="radio" name="Floor-Pickup"
+                value="Attempted" class="Teleop-option-input"> Both <br>
+            <input checked="true" id="NotAttempted-floorPickup"
+                onchange="floorPickupRadioChange('NotAttempted-floorPickup')" type="radio" name="Floor-Pickup"
+                value="Not attempted" class="Teleop-option-input"> Not attempted <br>
+        </div>
+        </p>
+
+        <!--
+        <div id="anotherContainer">
+            <div class="floor-pickup-container">
+                <label id="Floor-Pickup-label" class="Teleop-label"> Floor Pickup: </label>
+                <div class="floor-pickup-options">
+                    <div style="text-align:center">
+                        <input id="Cones-input" onchange="floorPickupRadioChange('Cones-input')" type="radio"
+                            name="Cones" value="Cones" class="Teleop-option-input">
+                        <label for="Cones-input">Cones</label>
+                    </div>
+                    <div style="text-align:center">
+                        <input id="Cubes-input" onchange="floorPickupRadioChange('Cubes-input')" type="radio"
+                            name="Cubes" value="Cubes" class="Teleop-option-input">
+                        <label for="Cubes-input">Cubes</label>
+                    </div>
+                    <div style="text-align:center">
+                        <input id="Both-input" onchange="floorPickupRadioChange('Both-input')" type="radio" name="Both"
+                            value="Attempted" class="Teleop-option-input">
+                        <label for="Both-input">Both</label>
+                    </div>
+                    <div style="text-align:center">
+                        <input checked="true" id="NotAttempted-floorPickup"
+                            onchange="floorPickupRadioChange('NotAttempted-floorPickup')" type="radio"
+                            name="NotAttempted" value="Not attempted" class="Teleop-option-input">
+                        <label for="NotAttempted-floorPickup">Not attempted</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+    </div>
+
+    <div id="page4" class="formPages">
+        <p> 4 </p>
+        <!--
                 NAME: Endgame
 
                 Docking Timer: TIMER FORCE (CHECK THE FUCKING SITE)
@@ -230,43 +258,63 @@
                 Total # of alliance robots docked/engaged: "" (+- range 0-3)
             -->
 
-            <p id="Docking-Timer-containerParagraph" class="Endgame-containerParagraph">
-                <label id="Docking-Timer-label" class="Endgame-label" for="Docking-Timer">
-                    Docking Timer;
-                </label>
-                <p id="Docking-Timer-input-containerParagraph" class="Endgame-nestedContainerParagraph">
-                    <button id="Start-Stop-Timer" class="Endgame-Docking-Timer-input-containerParagraph-button" onclick="timeTimer()">
-                        Start
-                    </button>
-                    <input id="Docking-Timer-input" class="Endgame-input-number" type="number" for="Docking-Timer" />
-                    <button id="Reset-Timer" class="Endgame-Docking-Timer-input-containerParagraph-button" onclick="resetTimer()">
-                        Reset
-                    </button>
-                </p>
-            </p>
+        <p id="Docking-Timer-containerParagraph" class="Endgame-containerParagraph">
+            <label id="Docking-Timer-label" class="Endgame-label" for="Docking-Timer">
+                Docking Timer;
+            </label>
+        <p id="Docking-Timer-input-containerParagraph" class="Endgame-nestedContainerParagraph">
+            <button id="Start-Stop-Timer" class="Endgame-Docking-Timer-input-containerParagraph-button"
+                onclick="timeTimer()">
+                Start
+            </button>
+            <input id="Docking-Timer-input" class="Endgame-input-number" type="number" for="Docking-Timer" />
+            <button id="Reset-Timer" class="Endgame-Docking-Timer-input-containerParagraph-button"
+                onclick="resetTimer()">
+                Reset
+            </button>
+        </p>
+        </p>
 
-            <p id="Final-Status-containerParagraph" class="Endgame-containerParagraph">
-                <label id="Final-Status-label" class="Endgame-label">
-                    Final Status
+        <p id="Final-Status-containerParagraph" class="Endgame-containerParagraph">
+            <label id="Final-Status-label" class="Endgame-label"> Final Status: </label>
+            <br>
+        <div style="text-align: center;">
+            <div style="text-align: left; margin-left:48%;">
+                <label for="Final-Status-Parked-input">
+                    <input id="Final-Status-Parked-input" onchange="finalStatusRadioChange('Final-Status-Parked-input')"
+                        type="radio" name="Parked" value="Parked" class="Endgame-option-input"
+                        style="display: inline-block; vertical-align: middle;"> Parked
                 </label>
-                <input id="Final-Status-Parked-input" onchange="finalStatusRadioChange('Final-Status-Parked-input')" type="radio" name="Parked" value="Parked" class="Endgame-option-input">
-                Parked
                 <br>
-                <input id="Final-Status-Docked-input" onchange="finalStatusRadioChange('Final-Status-Docked-input')" type="radio" name="Docked" value="Docked (Not Engaged)" class="Endgame-option-input"/>
-                Docked (Not Engaged)
+                <label for="Final-Status-Docked-input">
+                    <input id="Final-Status-Docked-input" onchange="finalStatusRadioChange('Final-Status-Docked-input')"
+                        type="radio" name="Docked" value="Docked (Not Engaged)" class="Endgame-option-input"
+                        style="display: inline-block; vertical-align: middle;"> Docked
+                    (Not Engaged)
+                </label>
                 <br>
-                <input id="Final-Status-Engaged-input" onchange="finalStatusRadioChange('Final-Status-Engaged-input')" type="radio" name="Engaged" value="Engaged" class="Endgame-option-input" />
-                Engaged
+                <label for="Final-Status-Engaged-input">
+                    <input id="Final-Status-Engaged-input"
+                        onchange="finalStatusRadioChange('Final-Status-Engaged-input')" type="radio" name="Engaged"
+                        value="Engaged" class="Endgame-option-input"
+                        style="display: inline-block; vertical-align: middle;"> Engaged
+                </label>
                 <br>
-                <input checked="true" id="Final-StatusAttemptedButFailed-input" onchange="finalStatusRadioChange('Final-Status-AttemptedButFailed-input') " type="radio" name="AttemptedButFailed" value="Attempted but failed" class="Endgame-option-ipnut" />
-                Attempted but failed
-                <br>
-            </p>
+                <label for="Final-Status-AttemptedButFailed-input">
+                    <input checked="true" id="Final-Status-AttemptedButFailed-input"
+                        onchange="finalStatusRadioChange('Final-Status-AttemptedButFailed-input') " type="radio"
+                        name="AttemptedButFailed" value="Attempted but failed" class="Endgame-option-input"
+                        style="display: inline-block; vertical-align: middle;"> Attempted
+                    but failed
+                </label>
+            </div>
+            <br>
         </div>
+    </div>
 
-        <div id="page5" class="formPages">
-            <p> 5 </p>
-            <!--
+    <div id="page5" class="formPages">
+        <p> 5 </p>
+        <!--
                 NAME: Miscellaneous
 
                 Driver skill: Not effective && Average && Effective && Not Observed [SELECT]
@@ -281,41 +329,53 @@
                 comments: text input
             -->
 
-            <p id="Driver-Skill-containerParagraph" class="Miscellaneous-containerParagraph">
-                <label id="Driver-Skill-label" class="Miscellaneous-label">
-                    Final Status:
-                </label>
-                <!--
+        <p id="Driver-Skill-containerParagraph" class="Miscellaneous-containerParagraph">
+            <label id="Driver-Skill-label" class="Miscellaneous-label">
+                Driver Skill:
+            </label>
+            <!--
                     <input id="Not-Effective-input" onchange="driverSkillRadioChange('Not-Effective-input')" type="radio" name="Not-Effective" value="Not Effective" class="Miscellaneous-option-input" />
                     Not Effective
                     <br>
                 -->
-            </p>
+        </p>
 
-            <p id="Links-Scored-containerParagraph" class="Miscellaneous-containerParagraph">
-                <label id="Links-Scored-label" class="Miscellaneous-label" for="Deez-Nuts">
-                    Links Scored:
-                </label>
-                <input id="Links-Scored-input" type="text" name="Deez-Nuts" value="Links-Scored" />
-            </p>
+        <p id="Links-Scored-containerParagraph" class="Miscellaneous-containerParagraph">
+            <label id="Links-Scored-label" class="Miscellaneous-label" for="Deez-Nuts">
+                Links Scored:
+            </label>
+            <input id="Links-Scored-input" type="text" name="Deez-Nuts" value="Links-Scored" />
+        </p>
 
-            <p id="Defense-Rating-containerParagraph" class="Miscellaneous-containerParagraph">
-                <label id="Defense-Rating-label" class="Miscellaneous-label">
-                    Defense Rating:
-                </label>
-                
-            </p>
+        <p id="Defense-Rating-containerParagraph" class="Miscellaneous-containerParagraph">
+            <label id="Defense-Rating-label" class="Miscellaneous-label">
+                Defense Rating:
+            </label>
+        </p>
+
+        <div id="totalNumberOfAllianceRobotsDockedOrEngaged-container" class="MiscellaneousContainer">
+            <label id="totalNumberOfAllianceRobotsDockedOrEngaged-label" class="Miscellaneous-label" for="LMFAO">
+                Total # of alliance <br> robots docked/engaged
+            </label>
+            <br>
+            <input type="number" id="totalNumberOfAllianceRobotsDockedOrEngaged-input"
+                class="Miscellaneous-input-number" value="0" name="LMFAO" />
         </div>
 
-        <div id="page6" class="formPages">
-            <p> 6 </p>
-            <!-- // / // -->
-        </div>
+        <br>
 
-        <div id="footer">
-            <input value="BACK" onclick="back()" type="button" id="backButton" class="footerButton">
-            <input value="NEXT" onclick="next()" type="button" id="nextButton" class="footerButton">
-            <input value="SUBMIT" onclick="submit()" type="button" id="submitButton" class="footerButton">
-        </div>
-    </body>
+    </div>
+
+    <div id="page6" class="formPages">
+        <p> 6 </p>
+        <!-- // / // -->
+    </div>
+
+    <div id="footer">
+        <input value="BACK" onclick="back()" type="button" id="backButton" class="footerButton">
+        <input value="NEXT" onclick="next()" type="button" id="nextButton" class="footerButton">
+        <input value="SUBMIT" onclick="submit()" type="button" id="submitButton" class="footerButton">
+    </div>
+</body>
+
 </html>

@@ -52,8 +52,12 @@ var notAttemptedInputFloor_Pickup;
 var dockingTimerInput;
 
 var driverSkillContainer;
-
 var defenseRatingContainer;
+
+var driverSkillLengthSaver = 0;
+
+var driverSkillLastClick = "Not-Observed-input";
+var defenseRatingLastClick = "Did-not-play-defense-input";
 
 //
 
@@ -89,42 +93,106 @@ function pageGetter() {
     return "error";
 }
 
+function back() {
+    setUpElements();
+
+    currentPage -= 1;
+
+    fixPages();
+    fixButtons();
+    namer();
+    catchInfo();
+}
+
 function setUpRadio(radioName) {
     let objArr = "";
-    let funcString = "";
+    let funcString = "radioChange";
     let pageName = pageGetter();
     let addString = "";
     let className = "";
     var container = null;
+    var lengthSaver;
+    var defaultRadio;
     if (radioName === "Driver-Skill") {
-        objArr = ["Not Effective", "Average", "Very Effective", "Not Observed"];
+        objArr = [
+            "Not Effective",
+            "Average",
+            "Very Effective",
+            "Not Observed"
+        ];
         funcString = "driverSkillRadioChange";
         className = pageName + "option-input";
         container = driverSkillContainer;
+        lengthSaver = driverSkillLengthSaver;
+        defaultRadio = driverSkillLastClick;
     } else if (radioName === "Defense-Rating") {
-        objArr = ["Terrible", "Bad", "Below Average", "Average", "Good", "Excellent", "Did not play defense"];
+        objArr = [
+            "Terrible",
+            "Bad",
+            "Below Average",
+            "Average",
+            "Good",
+            "Excellent",
+            "Did not play defense"
+        ];
         funcString = "defenseRatingRadioChange";
         className = pageName + "option-input";
         container = defenseRatingContainer;
+        defaultRadio = defenseRatingLastClick;
     }
 
-    if (container !== null && pageName !== "error") {
+    if (container !== null && pageName !== "error" && lengthSaver === 0) {
+        addString += "<label id=\"" + radioName + "-label\" class=\"" + pageName + "-label\"> " + radioName.replace("-", " ") + ": </label>"
         addString += "<div class=\"radioContainer\">"
         for (var i = 0; i < objArr.length; i++) {
             let objId = objArr[i].replace(" ", "-") + "-input";
             addString += "<input id=\"" + objId + "\" onchange=\"" + funcString + "(\'" + objId + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + "\" class=\"" + className + "\" /> " + objArr[i] + "<br>";
         }
-        addString += "</div>"
+        addString += "</div>";
+        document.getElementById(defaultRadio).checked = true;
     }
     container.innerHTML += addString;
+    lengthSaver = container.innerHTML.length;
+    if (radioName === "Driver-Skill") {
+        driverSkillLengthSaver = lengthSaver;
+    } else if (radioName === "Defense-Rating") {
+        defenseRatingLengthSaver = lengthSaver;
+    }
     setUpElements();
 }
 
+function defenseRatingRadioChange(id) {
+    defenseRatingLastClick = id;
+    objArr = [
+        "Terrible-input",
+        "Bad-input",
+        "Below-Average-input",
+        "Average-input",
+        "Good-input",
+        "Excellent-input",
+        "Did-not-play-defense-input"
+    ];
+    for (var i = 0; i < objArr.length; i++) {
+        document.getElementById(objArr[i]).checked = false;
+    }
+    if (!document.getElementById(id).checked) {
+        document.getElementById(id).checked = true;
+    } else {
+        document.getElementById(id).checked = false;
+    }
+}
+
 function driverSkillRadioChange(id) {
-    document.getElementById("Not-Effective-input").checked = false;
-    document.getElementById("Average-input").checked = false;
-    document.getElementById("Very-Effective-input").checked = false;
-    document.getElementById("Not-Observed-input").checked = false;
+    driverSkillLastClick = id;
+    objArr = [
+        "Not-Effective-input",
+        "Average-input",
+        "Very-Effective-input",
+        "Not-Observed-input"
+    ];
+    for (var i = 0; i < objArr.length; i++) {
+        document.getElementById(objArr[i]).checked = false;
+    }
     if (!document.getElementById(id).checked) {
         document.getElementById(id).checked = true;
     } else {
@@ -162,6 +230,7 @@ function next() {
         switch (currentPage) {
             case 5:
                 setUpRadio("Driver-Skill");
+                setUpRadio("Defense-Rating");
         }
     } else {
         alert(allInfoWasGiven());
@@ -203,6 +272,19 @@ function resetTimer() {
 
 function theTimer() {
     dockingTimerInput.value = parseFloat(dockingTimerInput.value) + 0.1;
+}
+
+function finalStatusRadioChange(id) {
+    idArr = [
+        "Final-Status-Parked-input",
+        "Final-Status-Docked-input",
+        "Final-Status-Engaged-input",
+        "Final-Status-AttemptedButFailed-input"
+    ];
+    for (var i = 0; i < idArr.length; i++) {
+        document.getElementById(idArr[i]).checked = false;
+    }
+    document.getElementById(id).checked = true;
 }
 
 function floorPickupRadioChange(input) {
