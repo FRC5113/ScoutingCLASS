@@ -4,6 +4,54 @@ var currentPage;
 const maxPage = 6;
 const minPage = 1;
 
+var data = {
+    "PRE_MATCH": {
+        "Scouter": "",
+        "Event": "",
+        "Match_level": "",
+        "Match_number": "",
+        "Robot": "",
+        "Team": 5113
+    },
+    "AUTON": {
+        "Auto-scoring": [],
+        "Crossed_cable": false,
+        "Crossed_charging-station": false,
+        "Mobility?": false,
+        "Docked": false,
+        "Engaged": false,
+        "DockedVal": "",
+    },
+    "TELEOP": {
+        "Cycle_timer": 0.0,
+        "Grid_scoring": [],
+        "Fed_another_bot": false,
+        "Feeder_count": 0,
+        "Was_fed": false,
+        "Was_defended": false,
+        "Defended_by": "",
+        "Made_links": false,
+        "pickedUpCubes": false,
+        "pickedUpCones": false
+    },
+    "ENDGAME": {
+        "Docking_timer": 0.0,
+        "Final_status": "",
+        "Total_number_of_alliance_robots_docked_or_engaged": 0
+    },
+    "MISCELLANEOUS": {
+        "Driver_skill": 0,
+        "Links_scored": 0,
+        "Defense_rating": 0,
+        "Swerve_drive": false,
+        "Speed_rating": 3,
+        "Died_or_immobilized": false,
+        "Tippy": false,
+        "Dropped_cones": false,
+        "comments": ""
+    }
+};
+
 var page1;
 var page2;
 var page3;
@@ -52,12 +100,16 @@ var notAttemptedInputFloor_Pickup;
 var dockingTimerInput;
 
 var driverSkillContainer;
-var defenseRatingContainer;
-
 var driverSkillLengthSaver = 0;
-
 var driverSkillLastClick = "Not-Observed-input";
+
+var defenseRatingContainer;
+var defenseRatingLengthSaver = 0;
 var defenseRatingLastClick = "Did-not-play-defense-input";
+
+var speedRatingContainer;
+var speedRatingLengthSaver = 0;
+var speedRatingLastClick = "3-input";
 
 //
 
@@ -74,7 +126,6 @@ function launch() {
 
     namer();
     fixPages();
-    setUpDriverSkill();
 }
 
 function pageGetter() {
@@ -109,7 +160,7 @@ function setUpRadio(radioName) {
     let funcString = "radioChange";
     let pageName = pageGetter();
     let addString = "";
-    let className = "";
+    let className = pageName + "-option-input";
     var container = null;
     var lengthSaver;
     var defaultRadio;
@@ -121,7 +172,6 @@ function setUpRadio(radioName) {
             "Not Observed"
         ];
         funcString = "driverSkillRadioChange";
-        className = pageName + "option-input";
         container = driverSkillContainer;
         lengthSaver = driverSkillLengthSaver;
         defaultRadio = driverSkillLastClick;
@@ -136,20 +186,50 @@ function setUpRadio(radioName) {
             "Did not play defense"
         ];
         funcString = "defenseRatingRadioChange";
-        className = pageName + "option-input";
         container = defenseRatingContainer;
+        lengthSaver = defenseRatingLengthSaver;
         defaultRadio = defenseRatingLastClick;
+    } else if (radioName === "Speed-Rating") {
+        objArr = [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+        ];
+        funcString = "speedRatingRadioChange";
+        container = speedRatingContainer;
+        lengthSaver = speedRatingLengthSaver;
+        defaultRadio = speedRatingLastClick;
     }
 
     if (container !== null && pageName !== "error" && lengthSaver === 0) {
-        addString += "<label id=\"" + radioName + "-label\" class=\"" + pageName + "-label\"> " + radioName.replace("-", " ") + ": </label>"
-        addString += "<div class=\"radioContainer\">"
-        for (var i = 0; i < objArr.length; i++) {
-            let objId = objArr[i].replace(" ", "-") + "-input";
-            addString += "<input id=\"" + objId + "\" onchange=\"" + funcString + "(\'" + objId + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + "\" class=\"" + className + "\" /> " + objArr[i] + "<br>";
+        addString += "<label id=\"" + radioName + "-label\" class=\"" + pageName + "-label\"> " + radioName.replace("-", " ") + ": </label>";
+        addString += "<div class=\"radioContainer\" style=\"text-align: left; margin-left:48%;\">";
+        if (radioName === "Speed-Rating") {
+            for (var i = 0; i < objArr.length; i++) {
+                let objId = objArr[i].replace(" ", "-") + "-input";
+                if (objId == defaultRadio) {
+                    addString += "<input id=\"" + objId + "\" onchange=\"" + funcString + "(\'" + objId + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + "\" class=\"" + className + "\" checked=\"true\" /> " + objArr[i] + "<br>";
+                } else if (objId == "1-input") {
+                    addString += "<input id=\"" + objId + "\" onchange=\"" + funcString + "(\'" + objId + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + " (slow)\" class=\"" + className + "\" /> " + objArr[i] + "<br>";
+                } else if (objId == "5-input") {
+                    addString += "<input id=\"" + objId + "\" onchange=\"" + funcString + "(\'" + objId + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + " (fast)\" class=\"" + className + "\" /> " + objArr[i] + "<br>";
+                } else {
+                    addString += "<input id=\"" + objId + "\" onchange=\"" + funcString + "(\'" + objId + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + "\" class=\"" + className + "\" /> " + objArr[i] + "<br>";
+                }
+            }
+        } else {
+            for (var i = 0; i < objArr.length; i++) {
+                let objId = objArr[i].replace(" ", "-") + "-input";
+                if (objId == defaultRadio) {
+                    addString += "<input id=\"" + objId + "\" onchange=\"" + funcString + "(\'" + objId + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + "\" class=\"" + className + "\" checked=\"true\" /> " + objArr[i] + "<br>";
+                } else {
+                    addString += "<input id=\"" + objId + "\" onchange=\"" + funcString + "(\'" + objId + "\')\" type=\"radio\" name=\"" + objArr[i].replace(" ", "-") + "\" value=\"" + objArr[i] + "\" class=\"" + className + "\" /> " + objArr[i] + "<br>";
+                }
+            }
         }
         addString += "</div>";
-        document.getElementById(defaultRadio).checked = true;
     }
     container.innerHTML += addString;
     lengthSaver = container.innerHTML.length;
@@ -157,8 +237,29 @@ function setUpRadio(radioName) {
         driverSkillLengthSaver = lengthSaver;
     } else if (radioName === "Defense-Rating") {
         defenseRatingLengthSaver = lengthSaver;
+    } else if (radioName === "Speed-Rating") {
+        speedRatingLengthSaver = lengthSaver;
     }
     setUpElements();
+}
+
+function speedRatingRadioChange(id) {
+    speedRatingLastClick = id;
+    idArr = [
+        "1-input",
+        "2-input",
+        "3-input",
+        "4-input",
+        "5-input"
+    ];
+    for (var i = 0; i < objArr.length; i++) {
+        document.getElementById(objArr[i]).checked = false;
+    }
+    if (!document.getElementById(id).checked) {
+        document.getElementById(id).checked = true;
+    } else {
+        document.getElementById(id).checked = false;
+    }
 }
 
 function defenseRatingRadioChange(id) {
@@ -229,8 +330,14 @@ function next() {
         catchInfo();
         switch (currentPage) {
             case 5:
-                setUpRadio("Driver-Skill");
-                setUpRadio("Defense-Rating");
+                radioArr = [
+                    "Driver-Skill",
+                    "Defense-Rating",
+                    "Speed-Rating"
+                ];
+                for (var i = 0; i < radioArr.length; i++) {
+                    setUpRadio(radioArr[i]);
+                }
         }
     } else {
         alert(allInfoWasGiven());
@@ -362,8 +469,8 @@ function setUpElements() {
     dockingTimerInput.value = 0.0;
 
     driverSkillContainer = document.getElementById('Driver-Skill-containerParagraph');
-
     defenseRatingContainer = document.getElementById('Defense-Rating-containerParagraph');
+    speedRatingContainer = document.getElementById('Speed-Rating-containerParagraph');
 }
 
 function dockedRadioChange(id) {

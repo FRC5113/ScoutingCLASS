@@ -137,7 +137,7 @@
         </p>
 
         <p id="Docked-containerParagraph" class="Auton-containerParagraph"
-            style="justify-content: space-between; display: inline-block;">
+        style="justify-content: space-between; display: inline-block;">
             <label id="Docked-label" class="Auton-label" style="display: block;"> Docked: </label>
         <div style="text-align: left; margin-left:48%;">
             <input id="Docked-input" onchange="dockedRadioChange('Docked-input')" type="radio" name="Docked-input"
@@ -308,8 +308,20 @@
                     but failed
                 </label>
             </div>
-            <br>
         </div>
+
+        <br>
+
+        <div id="totalNumberOfAllianceRobotsDockedOrEngaged-container" class="MiscellaneousContainer">
+            <label id="totalNumberOfAllianceRobotsDockedOrEngaged-label" class="Miscellaneous-label" for="LMFAO">
+                Total # of alliance <br> robots docked/engaged:
+            </label>
+            <br>
+            <input type="number" id="totalNumberOfAllianceRobotsDockedOrEngaged-input"
+                class="Miscellaneous-input-number" value="0" name="LMFAO" />
+        </div>
+
+        <br>
     </div>
 
     <div id="page5" class="formPages">
@@ -330,9 +342,11 @@
             -->
 
         <p id="Driver-Skill-containerParagraph" class="Miscellaneous-containerParagraph">
-            <label id="Driver-Skill-label" class="Miscellaneous-label">
-                Driver Skill:
-            </label>
+            <!--
+                <label id="Driver-Skill-label" class="Miscellaneous-label">
+                    Driver Skill:
+                </label>
+            -->
             <!--
                     <input id="Not-Effective-input" onchange="driverSkillRadioChange('Not-Effective-input')" type="radio" name="Not-Effective" value="Not Effective" class="Miscellaneous-option-input" />
                     Not Effective
@@ -344,26 +358,77 @@
             <label id="Links-Scored-label" class="Miscellaneous-label" for="Deez-Nuts">
                 Links Scored:
             </label>
-            <input id="Links-Scored-input" type="text" name="Deez-Nuts" value="Links-Scored" />
+            <input id="Links-Scored-input" type="number" name="Deez-Nuts" value="0" />
         </p>
 
         <p id="Defense-Rating-containerParagraph" class="Miscellaneous-containerParagraph">
-            <label id="Defense-Rating-label" class="Miscellaneous-label">
-                Defense Rating:
-            </label>
+            <!-- 
+                <label id="Defense-Rating-label" class="Miscellaneous-label">
+                    Defense Rating:
+                </label>
+            -->
         </p>
 
-        <div id="totalNumberOfAllianceRobotsDockedOrEngaged-container" class="MiscellaneousContainer">
-            <label id="totalNumberOfAllianceRobotsDockedOrEngaged-label" class="Miscellaneous-label" for="LMFAO">
-                Total # of alliance <br> robots docked/engaged
+        <br>
+
+        <div id="swerveDrive-container" class="Miscellaneous-container">
+            <label id="swerveDrive-label" class="Miscellaneous-label" for="swerveDrive">
+                SwervedDrive?:
             </label>
-            <br>
-            <input type="number" id="totalNumberOfAllianceRobotsDockedOrEngaged-input"
-                class="Miscellaneous-input-number" value="0" name="LMFAO" />
+            <input id="swerveDrive-input" type="checkbox" name="swerveDrive" />
+        </div>
+        <!-- 
+                <label id="Defense-Rating-label" class="Miscellaneous-label">
+                    Defense Rating:
+                </label>
+            -->
+        <br>
+
+        <p id="Speed-Rating-containerParagraph" class="Miscellaneous-containerParagraph">
+            <!-- 
+                <label id="Defense-Rating-label" class="Miscellaneous-label">
+                    Defense Rating:
+                </label>
+            -->
+        </p>
+
+        <br>
+
+        <div id="diedOrImmobilized-container" class="Miscellaneous-container">
+            <label id="diedOrImmobilized-label" class="Miscellaneous-label" for="diedOrImmobilized">
+                Died/Immobilized:
+            </label>
+            <input id="diedOrImmobilized-input" class="MiscellaneousCheckbox" type="checkbox" name="diedOrImmobilized" />
         </div>
 
         <br>
 
+        <div id="tippy-container" class="Miscellaneous-container">
+            <label id="tippy-label" class="Miscellaneous-label" for="tippy">
+                Tippy (almost tipped over):
+            </label>  
+            <input id="tippy-input" class="MiscellaneousCheckbox" type="checkbox" name="tippy" />
+        </div>
+
+        <br>
+
+        <div id="droppedCones-container" class="Miscellaneous-container">
+            <label id="droppedCones-label" class="Miscellaneous-label" for="droppedCones">
+                Dropped Cones (>2):
+            </label>  
+            <input id="droppedCones-input" class="MiscellaneousCheckbox" type="checkbox" name="droppedCones" />
+        </div>
+
+        <br>
+
+        <div id="comments-container" class="MiscellaneousContainer">
+            <label id="comments-label" class="Miscellaneous-label" for="comments">
+                Comments:
+            </label>
+            <input id="comments-input" class="MiscellaneousCheckbox" type="text" name="comments" />
+        </div>
+
+        <br>
     </div>
 
     <div id="page6" class="formPages">
