@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Data</title>
+</head>
+
+<body>
+    <table id="dtable">
+        <tr>
+            <th>Company</th>
+            <th>Contact</th>
+            <th>Country</th>
+        </tr>
+    </table>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+    <script>
+        fetch("https://scoutbackend.frc5113.com/get").then((resp) => {
+            resp.json().then((json) => {
+                // console.log(json)
+                var tbodyRef = document.getElementById('dtable').getElementsByTagName('tbody')[0];
+                json.forEach((f) => {
+                    // Insert a row at the end of table
+                    var newRow = tbodyRef.insertRow();
+
+                    // Insert a cell at the end of the row
+                    var newCell = newRow.insertCell();
+                    var newCell2 = newRow.insertCell();
+                    var newCell3 = newRow.insertCell();
+
+                    // Append a text node to the cell
+                    var newText = document.createTextNode(f[0]);
+                    var newText2 = document.createTextNode(f[1]);
+                    var newText3 = document.createTextNode(f[2]);
+                    newCell.appendChild(newText);
+                    newCell2.appendChild(newText2);
+                    newCell3.appendChild(newText3);
+                })
+            })
+        })   
+    </script>
+</body>
+
+</html>
