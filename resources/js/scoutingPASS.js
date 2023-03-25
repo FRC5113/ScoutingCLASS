@@ -1448,6 +1448,21 @@ function copyData(){
   document.getElementById('copyButton').setAttribute('value','Copied');
 }
 
+function submitToServer() {
+  fetch("CHANGEME", {
+    method: "post",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      data: getData(true)
+    })
+  })
+  .then( (response) => { 
+  });
+}
+
 window.onload = function () {
   let ret = configure();
   if (ret != -1) {
