@@ -2,11 +2,12 @@ from flask import Flask
 from flask import request
 from flask_cors import CORS, cross_origin
 import sqlite3 as sqlite
+from datetime import datetime
 
 app = Flask(__name__)
 conn = sqlite.connect("./data/db.sqlite")
 cur = conn.cursor()
-cur.execute("CREATE TABLE IF NOT EXISTS scoutdata (id INTEGER PRIMARY KEY AUTOINCREMENT, data TEXT);")
+cur.execute("CREATE TABLE IF NOT EXISTS scoutdata (id INTEGER PRIMARY KEY AUTOINCREMENT, time TEXT, data TEXT);")
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
@@ -14,6 +15,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @app.route("/add", methods=["POST"])
 def add():
     json_data = request.get_json()
-    cur.execute("insert into scoutdata (data) values (?)",
-            (json_data['data']))
+    # print(json_data['data'])
+    cur.execute("insert into scoutdata (time, data) values (?, ?)",
+            (str(datetime.now()), json_data['data'],))
+    conn.commit()
     return 'OK'
