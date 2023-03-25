@@ -23,7 +23,7 @@ def add():
     return 'OK'
 
 @cross_origin
-@app.route("/get", methods=["GET"])
+@app.route("/get")
 def get():
     cur.execute("select * from scoutdata;")
     rows = cur.fetchall()
