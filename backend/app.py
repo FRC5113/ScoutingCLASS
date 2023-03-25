@@ -14,5 +14,6 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @app.route("/add", methods=["POST"])
 def add():
     json_data = request.get_json()
-    print(json_data)
+    cur.execute("insert into scoutdata (data) values (?)",
+            (json_data['data']))
     return 'OK'

@@ -1449,7 +1449,7 @@ function copyData(){
 }
 
 function submitToServer() {
-  fetch("CHANGEME", {
+  fetch("https://scoutbackend.frc5113.com/add", {
     method: "post",
     headers: {
       'Accept': 'application/json',
