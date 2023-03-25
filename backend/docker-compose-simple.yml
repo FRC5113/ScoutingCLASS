@@ -1,0 +1,7 @@
+services:
+  web:
+    build: .
+    volumes:
+      - ./data:/code/data
+    ports:
+      - "8080:8080"

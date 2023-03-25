@@ -1,7 +1,17 @@
+version: '3'
+  
 services:
   web:
     build: .
     volumes:
       - ./data:/code/data
-    ports:
-      - "8080:8080"
+    #ports:
+    #  - "8080:8080"
+    networks:
+      mainnet:
+        aliases:
+          - scoutend
+
+networks:
+  mainnet:
+    external: true
