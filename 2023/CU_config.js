@@ -1,7 +1,7 @@
 var config_data = `
 {
-  "title": "FRC5113 | Hatboro-Horsham",
-  "page_title": "Charged Up",
+  "title": "FRC5113 | Seneca",
+  "page_title": "5113 @ Seneca",
   "checkboxAs": "10",
   "prematch": [
     { "name": "Scouter Initials",
@@ -14,7 +14,7 @@ var config_data = `
     { "name": "Event",
       "code": "e",
       "type": "event",
-      "defaultValue": "2023pahat",
+      "defaultValue": "2023njtab",
       "required": "true",
       "disabled": "true"
     },
@@ -223,11 +223,11 @@ var config_data = `
       "code": "tip",
       "type": "bool"
     },
-    { "name": "Dropped Cones (>2)",
+    { "name": "Dropped Cones/Cubes (>2)",
       "code": "dc",
       "type": "bool"
     },
-    { "name": "Make good<br>alliance partner?",
+    { "name": "Worked well<br> with alliance?",
       "tooltip": "Would you want this robot on your alliance in eliminations?",
       "code": "all",
       "type": "bool"
