@@ -1460,6 +1460,13 @@ function submitToServer() {
     })
   })
   .then( (response) => { 
+    response.text().then((r) => {
+      if (r.includes("OK")) {
+        alert("Saved Properly")
+      } else {
+        alert("Save failed, take a QR Code screenshot")
+      }
+    })
   });
 }
 
