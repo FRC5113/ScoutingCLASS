@@ -10,10 +10,10 @@
 
 <body>
     <table id="dtable">
-        <tr>
-            <th>Company</th>
-            <th>Contact</th>
-            <th>Country</th>
+        <tr id="tabletop">
+            <th>ID</th>
+            <th>Time</th>
+            <!-- <th>Form</th> -->
         </tr>
     </table>
     <style>
@@ -35,6 +35,11 @@
         }
     </style>
     <script>
+        const POINTS = ["Scouter", "Event", "Match Type", "Match Number", "Robot", "Number", "Auto Start", "Auto Scoring", "Crossed Cable", "Crossed Charing Station", "Driver Skill", "Links", "Defense", "Swerve", "Speed", "Died", "Tippy", "Dropped", "Worked Well", "Comments"]
+        const tableTop = document.getElementById("tabletop");
+        POINTS.forEach((point) => {
+            tableTop.innerHTML += "<th>"+point+"</th>"
+        })
         fetch("https://scoutbackend.frc5113.com/get").then((resp) => {
             resp.json().then((json) => {
                 // console.log(json)
@@ -46,15 +51,21 @@
                     // Insert a cell at the end of the row
                     var newCell = newRow.insertCell();
                     var newCell2 = newRow.insertCell();
-                    var newCell3 = newRow.insertCell();
 
+                    var data = f[2].split(";");
+                    for (var point in data) {
+                       var cell = newRow.insertCell();
+                       var text = document.createTextNode(data[point].split('=')[1]);
+                       cell.appendChild(text);
+                    }
                     // Append a text node to the cell
                     var newText = document.createTextNode(f[0]);
                     var newText2 = document.createTextNode(f[1]);
-                    var newText3 = document.createTextNode(f[2]);
+                    // s=GB;e=2023njtab;l=f;m=7;r=b3;t=1812;as=[39];asg=[5];
+                    // acc=1;acs=1;am=1;ad=e;tct=[];tsg=[12,21];tfc=0;wf=0;wd=0;
+                    // who=;lnk=1;fpu=o;dt=0;fs=x;dn=0;ds=x;ls=2;dr=x;sd=1;sr=4;die=0;tip=0;dc=0;all=1;co=
                     newCell.appendChild(newText);
                     newCell2.appendChild(newText2);
-                    newCell3.appendChild(newText3);
                 })
             })
         })   
